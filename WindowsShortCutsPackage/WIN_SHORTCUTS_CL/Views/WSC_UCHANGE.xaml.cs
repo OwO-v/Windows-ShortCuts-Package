@@ -1,12 +1,17 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace WIN_SHORTCUTS_CL.Views
 {
-    public partial class WSC_CSTMCHANGE : UserControl
+    public partial class WSC_UCHANGE : Window
     {
-        public WSC_CSTMCHANGE()
+        /// <summary>
+        /// 사용자 저장 
+        /// </summary>
+        public WSC_UCHANGE()
         {
             InitializeComponent();
         }
+
+        
     }
 }

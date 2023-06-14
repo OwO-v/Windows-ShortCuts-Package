@@ -49,7 +49,7 @@ namespace WIN_SHORTCUTS_CL.Functions
                     return base.WndProc(hWnd, Msg, wParam, lParam, ref handled);
             }
 
-            // base 혹은 return 둘 중 하나만 적용
+            // base.WndProc 혹은 IntPtr.Zero 둘 중 하나만 적용
             // 컨트롤 기본 동작 유지를 위해 base.WndProc() 이용
             return base.WndProc(hWnd, Msg, wParam, lParam, ref handled);
             //return IntPtr.Zero;

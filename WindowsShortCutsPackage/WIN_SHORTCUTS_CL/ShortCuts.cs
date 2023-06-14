@@ -10,9 +10,12 @@ namespace WIN_SHORTCUTS_CL
 {
     #region Comment History
 
-    // 2023.06.13 - 내가 무슨 생각으로 Dll을 먼저 만들었을까?
-    // 2023.06.13 - 오늘은 단일 단축키만 만들자
-
+    // 2023.06.13
+    // 내가 무슨 생각으로 Dll을 먼저 만들었을까?
+    // 오늘은 단일 단축키만 만들자
+    //
+    // 2023.06.14
+    // 오늘은 기본 View와 Tray, 사용자 커스텀 만들자
     #endregion
 
     #region Develop Guide
@@ -20,6 +23,7 @@ namespace WIN_SHORTCUTS_CL
     // Endpoint는 여기!
     // Dispose 시 모두 UnHook하기
     // 실행 단계에서 파일을 읽고 다시 Hook 걸기
+    // WinForm을 오래하다보니 System.Windows.Forms에 너무 의존하고있다. Forms 쓰지말자
 
     #endregion
 
