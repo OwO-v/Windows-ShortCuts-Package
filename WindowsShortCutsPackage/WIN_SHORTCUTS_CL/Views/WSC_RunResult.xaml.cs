@@ -13,14 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WIN_SHORTCUTS_CL.Forms
+namespace WIN_SHORTCUTS_CL.Views
 {
-    /// <summary>
-    /// WCL_MAIN.xaml에 대한 상호 작용 논리
-    /// </summary>
-    public partial class WCL_MAIN : UserControl
+    public partial class WSC_RunResult : Window
     {
-        public WCL_MAIN()
+        public WSC_RunResult()
         {
             InitializeComponent();
         }
