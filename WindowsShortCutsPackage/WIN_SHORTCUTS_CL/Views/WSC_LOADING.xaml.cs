@@ -3,11 +3,13 @@ using System.Windows;
 
 namespace WIN_SHORTCUTS_CL.Views
 {
-    public partial class WSC_LOADING : Window
+    internal partial class WSC_LOADING : Window
     {
-        public WSC_LOADING()
+        internal WSC_LOADING()
         {
             InitializeComponent();
         }
+
+
     }
 }

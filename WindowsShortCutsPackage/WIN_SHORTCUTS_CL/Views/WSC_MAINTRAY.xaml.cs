@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace WIN_SHORTCUTS_CL.Views
 {
-    public partial class WSC_TRAY : Window, IDisposable
+    public partial class WSC_MAINTRAY : Window, IDisposable
     {
         #region Dispose 구현
         public void Dispose()
@@ -56,14 +56,14 @@ namespace WIN_SHORTCUTS_CL.Views
         
         #endregion
 
-        public WSC_TRAY()
+        public WSC_MAINTRAY()
         {
             InitializeComponent();
-            SetTrayIcon(/*(Icon)Resources.Source.GetObject("notifyIcon1.Icon")*/ null);
+            SetTrayIcon((Icon)Properties.Resources.ICON_MAINTRAY);
             InitMenuItem();
         }
 
-        public WSC_TRAY(Icon _customIcon)
+        public WSC_MAINTRAY(Icon _customIcon)
         {
             InitializeComponent();
             SetTrayIcon(_customIcon);

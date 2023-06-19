@@ -63,13 +63,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Structure\ScDllException.cs" />
     <Compile Include="Functions\ScTool.cs" />
     <Compile Include="Functions\ViewCurrentKey.cs" />
     <Compile Include="Structure\KeyPressedEventArgs.cs" />
     <Compile Include="Functions\HookHandleCreater.cs" />
     <Compile Include="ShortCuts.cs" />
-    <Compile Include="Views\WSC_TRAY.xaml.cs">
-      <DependentUpon>WSC_TRAY.xaml</DependentUpon>
+    <Compile Include="Views\WSC_MAINTRAY.xaml.cs">
+      <DependentUpon>WSC_MAINTRAY.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WSC_RunResult.xaml.cs">
       <DependentUpon>WSC_RunResult.xaml</DependentUpon>
@@ -86,7 +92,7 @@
     <Compile Include="Functions\Win32API.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\WSC_TRAY.xaml">
+    <Page Include="Views\WSC_MAINTRAY.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,6 +109,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ICON_MAINTRAY.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,10 +1,17 @@
 ﻿
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace WIN_SHORTCUTS_CL.Structure
 {
     internal class KeyboardDTO
     {
+        internal static int Mode { get; set; }
+        internal static int TrayMode { get; set; }
+
+        internal static UserControl ViewUC_Load { get; set; }
+        internal static UserControl ViewUC_Conf { get; set; }
+
         /// <summary>
         /// Default Modifier Key는 Control + Shift;
         /// </summary>

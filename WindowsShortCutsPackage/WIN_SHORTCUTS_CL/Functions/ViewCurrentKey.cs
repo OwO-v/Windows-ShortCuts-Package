@@ -10,12 +10,12 @@ namespace WIN_SHORTCUTS_CL.Functions
     /// </summary>
     internal class ViewCurrentKey : KeyEventArgs
     {
-        public ViewCurrentKey(Key keyData) : base(Keyboard.PrimaryDevice, new HwndSource(0, 0, 0, 0, 0, "", IntPtr.Zero), 0, keyData)
+        internal ViewCurrentKey(Key keyData) : base(Keyboard.PrimaryDevice, new HwndSource(0, 0, 0, 0, 0, "", IntPtr.Zero), 0, keyData)
         {
 
         }
 
-        public bool IsValid
+        internal bool IsValid
         {
             get
             {

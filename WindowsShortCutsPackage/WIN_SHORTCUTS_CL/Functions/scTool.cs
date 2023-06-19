@@ -17,7 +17,7 @@ namespace WIN_SHORTCUTS_CL.Functions
         private int _lastId = 0;
 
 
-        public ScTool()
+        internal ScTool()
         {
             windowHandle = new HookHandleCreater();
             keyboardValues = new KeyboardDTO();
@@ -29,7 +29,7 @@ namespace WIN_SHORTCUTS_CL.Functions
             };
         }
 
-        public void RegisterHotKey()
+        internal void RegisterHotKey()
         {
             if (Win32API.UnregisterHotKey(windowHandle.Handle, _lastId))
                 _currentId.Remove(_lastId);
@@ -39,7 +39,7 @@ namespace WIN_SHORTCUTS_CL.Functions
             else
                 throw new InvalidOperationException("단축키 저장 실패");
         }
-        public void RegisterHotKey(ModiKey _modifier, Key _key)
+        internal void RegisterHotKey(ModiKey _modifier, Key _key)
         {
             keyboardValues.ModifierKey = _modifier;
             keyboardValues.DataKey = _key;

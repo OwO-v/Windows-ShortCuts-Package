@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WIN_SHORTCUTS_CL.Structure
 {
     [Flags]
-    public enum ModiKey : uint
+    internal enum ModiKey : uint
     {
         None = 0,
         Alt = 1,
