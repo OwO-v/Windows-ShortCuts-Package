@@ -63,44 +63,54 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\ScConfFileTool.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Structure\ScAction.cs" />
     <Compile Include="Structure\ScDllException.cs" />
-    <Compile Include="Functions\ScTool.cs" />
+    <Compile Include="Functions\ScCore.cs" />
     <Compile Include="Functions\ViewCurrentKey.cs" />
     <Compile Include="Structure\KeyPressedEventArgs.cs" />
-    <Compile Include="Functions\HookHandleCreater.cs" />
+    <Compile Include="Functions\ScHandleController.cs" />
     <Compile Include="ShortCuts.cs" />
+    <Compile Include="Structure\ScPairStructs.cs" />
+    <Compile Include="Views\UC_DATAPANEL.xaml.cs">
+      <DependentUpon>UC_DATAPANEL.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WSC_MAINTRAY.xaml.cs">
       <DependentUpon>WSC_MAINTRAY.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WSC_RunResult.xaml.cs">
-      <DependentUpon>WSC_RunResult.xaml</DependentUpon>
+    <Compile Include="Views\WSC_ACTION.xaml.cs">
+      <DependentUpon>WSC_ACTION.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WSC_UCHANGE.xaml.cs">
-      <DependentUpon>WSC_UCHANGE.xaml</DependentUpon>
+    <Compile Include="Views\WSC_USERCONFIG.xaml.cs">
+      <DependentUpon>WSC_USERCONFIG.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\WSC_LOADING.xaml.cs">
       <DependentUpon>WSC_LOADING.xaml</DependentUpon>
     </Compile>
     <Compile Include="Structure\KeyboardDTO.cs" />
-    <Compile Include="Structure\ModiKeys.cs" />
+    <Compile Include="Structure\ModiKey.cs" />
     <Compile Include="Functions\Win32API.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\UC_DATAPANEL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WSC_MAINTRAY.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WSC_RunResult.xaml">
+    <Page Include="Views\WSC_ACTION.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WSC_UCHANGE.xaml">
+    <Page Include="Views\WSC_USERCONFIG.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

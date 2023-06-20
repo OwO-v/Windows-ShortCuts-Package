@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace WIN_SHORTCUTS_CL
     //
     // 2023.06.19
     // 어째 점점 범위가 엄청나게 커지고 있다. 플로우 그려놓고 다시 시작
+    // 디버깅 없는 개발이라니
     #endregion
 
     #region Develop Guide
@@ -49,7 +51,7 @@ namespace WIN_SHORTCUTS_CL
 
         #endregion
 
-        private static Task[] ShortCutsWorker = null;
+        #region 프로퍼티
 
         public int Mode
         {
@@ -79,25 +81,46 @@ namespace WIN_SHORTCUTS_CL
             set { KeyboardDTO.ViewUC_Conf = value; }
         }
 
-        public Task<bool>Run()
+        #endregion
+
+        private readonly CancellationTokenSource _disposeCts = new CancellationTokenSource();
+        public ShortCuts()
         {
-            if (ShortCutsWorker != null)
+            InitializeDtoParams();
+        }
+
+        public void InitializeDtoParams()
+        {
+            KeyboardDTO.Mode = -1;
+            KeyboardDTO.TrayMode = -1;
+            KeyboardDTO.ViewUC_Load = null;
+            KeyboardDTO.ViewUC_Conf = null;
+            KeyboardDTO.ScWorker = null;
+            KeyboardDTO.UserKeyPairFilePath = Environment.CurrentDirectory + Path.DirectorySeparatorChar + "ShortCuts.ini";
+            KeyboardDTO.CurrentUserKeyPairFile = null;
+            KeyboardDTO.ScPairs = new ShortCutsPairList(null);
+            KeyboardDTO.ScCurrentId = 0;
+        }
+
+        public Task<bool> Run()
+        {
+            if (KeyboardDTO.ScWorker != null)
             {
                 throw new ScDllException("이미 단축키 프로그램이 실행중입니다.");
             }
             
             try
             {
-                Task<int> tskLoad = View_Loading();
-                Task<int> tskMain = View_Main();
-                Task<int>[] WindowsShortCutsPackageTask = new[] {tskLoad,tskMain};
+                Task<int> tskLoad = View_Loading(_disposeCts.Token);
+                Task<int> tskMain = View_Main(_disposeCts.Token);
+                Task<int>[] WindowsShortCutsPackageTask = new[] { tskLoad, tskMain };
 
-                ShortCutsWorker = WindowsShortCutsPackageTask.Select(async t =>
+                KeyboardDTO.ScWorker = WindowsShortCutsPackageTask.Select(async t =>
                 {
                     var tskResult = await t;
                 }).ToArray();
 
-                Task.WhenAll(ShortCutsWorker);
+                Task.WhenAll(KeyboardDTO.ScWorker);
 
             }
             catch (InvalidOperationException te)
@@ -116,17 +139,17 @@ namespace WIN_SHORTCUTS_CL
             return Task.FromResult(true);
         }
 
-        public void testc()
-        {
-            var a = Run();
-            Console.WriteLine(a.Result);
-        }
-
         public bool Stop()
         {
             try
             {
-                ShortCutsWorker = null;
+                KeyboardDTO.ScWorker.ToList().ForEach(t =>
+                {
+                    if (t.IsCompleted == false)
+                        t.ContinueWith(x => x.Dispose(), TaskScheduler.FromCurrentSynchronizationContext());
+                    _disposeCts.Cancel();
+                });
+                KeyboardDTO.ScWorker = null;
                 this.Dispose();
             }
             catch(ScDllException se)
@@ -141,21 +164,36 @@ namespace WIN_SHORTCUTS_CL
             return true;
         }
 
-        private Task<int> View_Loading()
+
+        private Task<int> View_Loading(CancellationToken cts)
         {
             var loadView = new WSC_LOADING();
             loadView.ShowDialog();
-            if (!loadView.DialogResult.HasValue || !loadView.DialogResult.Value)
+
+            if (loadView.DialogResult.HasValue == false || loadView.DialogResult.Value == false)
             {
                 throw new ScDllException("ShortCuts Initialize를 실패했습니다.");
             }
+
+            if (cts.IsCancellationRequested)
+            {
+                loadView.Close();
+            }
+
             return Task.FromResult(1);
         }
 
-        private Task<int> View_Main()
+        private Task<int> View_Main(CancellationToken cts)
         {
             var trayView = new WSC_MAINTRAY();
             trayView.Show();
+
+            if (cts.IsCancellationRequested)
+            {
+                trayView.Close();
+                trayView.Dispose();
+            }
+
 
             return Task.FromResult(1);
         }

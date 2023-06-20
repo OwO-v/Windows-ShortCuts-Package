@@ -10,10 +10,9 @@ namespace WIN_SHORTCUTS_CL.Functions
     /// wndProc후킹을 위한 Win32API 창은 MSDN 참고해서 뚝딱
     /// https://learn.microsoft.com/ko-kr/dotnet/desktop/wpf/advanced/walkthrough-hosting-a-win32-control-in-wpf?view=netframeworkdesktop-4.8
     /// </summary>
-    internal class HookHandleCreater : HwndHost, IDisposable
+    internal class ScHandleController : HwndHost, IDisposable
     {
         internal event EventHandler<KeyPressedEventArgs> KeyPressed;
-
         IntPtr hwndHost = IntPtr.Zero;
 
         /// <summary>

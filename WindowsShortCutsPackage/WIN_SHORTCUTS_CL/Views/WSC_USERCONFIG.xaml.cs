@@ -2,16 +2,14 @@
 
 namespace WIN_SHORTCUTS_CL.Views
 {
-    public partial class WSC_UCHANGE : Window
+    public partial class WSC_USERCONFIG : Window
     {
         /// <summary>
         /// 사용자 저장 
         /// </summary>
-        public WSC_UCHANGE()
+        public WSC_USERCONFIG()
         {
             InitializeComponent();
         }
-
-        
     }
 }

@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace WIN_SHORTCUTS_CL.Views
 {
-    public partial class WSC_RunResult : Window
+    /// <summary>
+    /// UC_DATAPANEL.xaml에 대한 상호 작용 논리
+    /// </summary>
+    public partial class UC_DATAPANEL : UserControl
     {
-        public WSC_RunResult()
+        public UC_DATAPANEL()
         {
             InitializeComponent();
         }

@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Forms;
 using System.Drawing;
+using WIN_SHORTCUTS_CL.Functions;
+using WIN_SHORTCUTS_CL.Structure;
 
 namespace WIN_SHORTCUTS_CL.Views
 {
@@ -16,11 +18,9 @@ namespace WIN_SHORTCUTS_CL.Views
             tryItem_Title = null;
 
             tryItem_Enable.Click -= TryItem_Enable_Click;
-            tryItem_Enable.VisibleChanged -= TryItem_Enable_VisibleChanged;
             tryItem_Enable = null;
 
             tryItem_Disable.Click -= TryItem_Disable_Click;
-            tryItem_Disable.VisibleChanged -= TryItem_Disable_VisibleChanged;
             tryItem_Disable = null;
 
             tryItem_UserConfig.Click -= TryItem_UserConfig_Click;
@@ -53,8 +53,10 @@ namespace WIN_SHORTCUTS_CL.Views
 
         private ToolStripSeparator tryItem_TitleSeparator = null;
         private ToolStripSeparator tryItem_ExitSeparator = null;
-        
+
         #endregion
+
+        ScCore _ScCore = null;
 
         public WSC_MAINTRAY()
         {
@@ -116,7 +118,6 @@ namespace WIN_SHORTCUTS_CL.Views
             tryItem_Enable.Enabled = true;
 
             tryItem_Enable.Click += TryItem_Enable_Click;
-            tryItem_Enable.VisibleChanged += TryItem_Enable_VisibleChanged;
             
             #endregion
 
@@ -126,7 +127,6 @@ namespace WIN_SHORTCUTS_CL.Views
             tryItem_Disable.Enabled = false;
 
             tryItem_Disable.Click += TryItem_Disable_Click;
-            tryItem_Disable.VisibleChanged += TryItem_Disable_VisibleChanged;
 
             #endregion
 
@@ -167,7 +167,7 @@ namespace WIN_SHORTCUTS_CL.Views
 
         private void TryMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            
         }
 
         private void TryIcon_DoubleClick(object sender, EventArgs e)
@@ -178,11 +178,9 @@ namespace WIN_SHORTCUTS_CL.Views
 
         private void TryItem_Enable_Click(object sender, EventArgs e)
         {
+            _ScCore = new ScCore();
+            _ScCore.KeyPressed += new EventHandler<KeyPressedEventArgs>(ShortCutsKeyPressed);
 
-        }
-
-        private void TryItem_Enable_VisibleChanged(object sender, EventArgs e)
-        {
             tryItem_Enable.Visible = false;
             tryItem_Enable.Enabled = false;
 
@@ -194,11 +192,10 @@ namespace WIN_SHORTCUTS_CL.Views
 
         private void TryItem_Disable_Click(object sender, EventArgs e)
         {
+            _ScCore.KeyPressed -= new EventHandler<KeyPressedEventArgs>(ShortCutsKeyPressed);
+            _ScCore.UnregisterHotKey(KeyboardDTO.ScCurrentId);
+            _ScCore.Dispose();
 
-        }
-
-        private void TryItem_Disable_VisibleChanged(object sender, EventArgs e)
-        {
             tryItem_Disable.Visible = false;
             tryItem_Disable.Enabled = false;
             tryItem_UserConfig.Visible = false;
@@ -210,13 +207,29 @@ namespace WIN_SHORTCUTS_CL.Views
 
         private void TryItem_UserConfig_Click(object sender, EventArgs e)
         {
+            var UserConfig = new WSC_USERCONFIG();
 
+            _ScCore.KeyPressed -= new EventHandler<KeyPressedEventArgs>(ShortCutsKeyPressed);
+
+            UserConfig.ShowDialog();
+            _ScCore.RegisterHotKey(KeyboardDTO.ScPairs, KeyboardDTO.ScCurrentId);
+
+            _ScCore.KeyPressed += new EventHandler<KeyPressedEventArgs>(ShortCutsKeyPressed);
         }
 
         private void TryItem_Exit_Click(object sender, EventArgs e)
         {
             System.Windows.Application.Current.Shutdown(0);
             this.Dispose();
+        }
+
+        private void ShortCutsKeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            foreach(var pair in KeyboardDTO.ScPairs)
+            {
+                if (pair.ModifierKey == e.EvtModifier && pair.DataKey == e.EvtData)
+                    _ScCore.ScKindAction(pair);
+            }
         }
 
         #endregion

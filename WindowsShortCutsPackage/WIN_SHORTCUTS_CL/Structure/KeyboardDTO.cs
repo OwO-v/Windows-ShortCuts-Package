@@ -1,53 +1,29 @@
-﻿
-using System.Windows.Controls;
-using System.Windows.Input;
-
-namespace WIN_SHORTCUTS_CL.Structure
+﻿namespace WIN_SHORTCUTS_CL.Structure
 {
-    internal class KeyboardDTO
+    internal static class KeyboardDTO
     {
-        internal static int Mode { get; set; }
-        internal static int TrayMode { get; set; }
+        // ===== EnvArgs
+        internal static System.Int32 Mode { get; set; }
+        internal static System.Int32 TrayMode { get; set; }
+        
 
-        internal static UserControl ViewUC_Load { get; set; }
-        internal static UserControl ViewUC_Conf { get; set; }
+        // ===== Custom Views
+        internal static System.Windows.Controls.UserControl ViewUC_Load { get; set; }
+        internal static System.Windows.Controls.UserControl ViewUC_Conf { get; set; }
 
-        /// <summary>
-        /// Default Modifier Key는 Control + Shift;
-        /// </summary>
-        internal ModiKey? ModifierKey
-        {
-            get
-            {
-                if (modifierKey == null || modifierKey == ModiKey.None)
-                    return ModiKey.Control | ModiKey.Shift;
 
-                return modifierKey;
-            }
-            set
-            {
-                modifierKey = value;
-            }
-        }
-        private ModiKey? modifierKey;
+        // ===== Worker
+        internal static System.Threading.Tasks.Task[] ScWorker { get; set; }
 
-        /// <summary>
-        /// Default Data Key는 C; 
-        /// </summary>
-        internal Key? DataKey
-        {
-            get
-            {
-                if (dataKey == null || dataKey == Key.None)
-                    return Key.C;
 
-                return dataKey;
-            }
-            set
-            {
-                dataKey = value;
-            }
-        }
-        private Key? dataKey;
+        // ===== Config
+        internal static System.String UserKeyPairFilePath { get; set; }
+        internal static System.IO.Stream CurrentUserKeyPairFile { get; set; } // 사용중 여부 확인에만 이용, 사용 후 Dispose/null
+
+        
+        // ===== KeyStruct
+        internal static WIN_SHORTCUTS_CL.Structure.ShortCutsPairList ScPairs { get; set; }
+        internal static System.Int32 ScCurrentId { get; set; }
+
     }
 }
