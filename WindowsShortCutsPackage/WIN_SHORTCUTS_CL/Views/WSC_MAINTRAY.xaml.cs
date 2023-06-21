@@ -37,6 +37,9 @@ namespace WIN_SHORTCUTS_CL.Views
 
             tryIcon.DoubleClick -= TryIcon_DoubleClick;
             tryIcon.Dispose();
+
+
+            GC.SuppressFinalize(this);
         }
 
         #endregion

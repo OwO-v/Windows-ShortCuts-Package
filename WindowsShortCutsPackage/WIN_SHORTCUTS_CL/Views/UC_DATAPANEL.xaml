@@ -39,12 +39,15 @@
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                <Border BorderBrush="DarkGray" Width="307" BorderThickness="0">
+                                <Border BorderBrush="DarkGray" Width="277" BorderThickness="0">
                                     <DockPanel>
                                         <Label Name="lb_target" Width="38" Height="29" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="9">대상</Label>
-                                        <TextBox Name="tb_target" Width="269" Height="29" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1,0,0,0" FontSize="9" BorderBrush="DarkGray"></TextBox>
+                                        <TextBox Name="tb_target" Width="239" Height="29" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1,0,0,0" FontSize="9" BorderBrush="DarkGray" HorizontalAlignment="Left"></TextBox>
                                     </DockPanel>
                                 </Border>
+                                <Button Width="30" Height="29" Click="Button_Click" Background="White" BorderBrush="DarkGray" BorderThickness="1 0 1 0">
+                                    <CheckBox IsChecked="true" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="9" FontStretch="UltraExpanded" BorderThickness="0,0,0,0" Cursor="IBeam"></CheckBox>
+                                </Button>
                                 <Border Background="LightGray" Width="30" Height="29" >
                                 </Border>
                             </StackPanel>

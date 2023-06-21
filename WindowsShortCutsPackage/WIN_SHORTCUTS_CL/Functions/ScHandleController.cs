@@ -10,7 +10,7 @@ namespace WIN_SHORTCUTS_CL.Functions
     /// wndProc후킹을 위한 Win32API 창은 MSDN 참고해서 뚝딱
     /// https://learn.microsoft.com/ko-kr/dotnet/desktop/wpf/advanced/walkthrough-hosting-a-win32-control-in-wpf?view=netframeworkdesktop-4.8
     /// </summary>
-    internal class ScHandleController : HwndHost, IDisposable
+    internal class ScHandleController : HwndHost
     {
         internal event EventHandler<KeyPressedEventArgs> KeyPressed;
         IntPtr hwndHost = IntPtr.Zero;
@@ -53,7 +53,8 @@ namespace WIN_SHORTCUTS_CL.Functions
             return base.WndProc(hWnd, Msg, wParam, lParam, ref handled);
             //return IntPtr.Zero;
         }
-
+        
+        //Handle을 명시적으로 삭제, Dispose를 따로 구현하지 않아도 부모 클래스 HwndHost에서 DestoryWindowCore를 통해 구현한다.
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
             Win32API.DestroyWindow(hwnd.Handle);

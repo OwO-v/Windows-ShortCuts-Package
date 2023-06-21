@@ -24,5 +24,10 @@ namespace WIN_SHORTCUTS_CL.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

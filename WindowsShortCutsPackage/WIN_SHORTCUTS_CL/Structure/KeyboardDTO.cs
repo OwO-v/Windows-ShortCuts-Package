@@ -18,7 +18,7 @@
 
         // ===== Config
         internal static System.String UserKeyPairFilePath { get; set; }
-        internal static System.IO.Stream CurrentUserKeyPairFile { get; set; } // 사용중 여부 확인에만 이용, 사용 후 Dispose/null
+        internal static System.IO.Stream CurrentUserKeyPairFile { get; set; }
 
         
         // ===== KeyStruct
